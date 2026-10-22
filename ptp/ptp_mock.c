@@ -384,9 +384,9 @@ static void mock_phc_destroy(struct kref *ref)
 {
 	struct mock_phc *phc = container_of(ref, struct mock_phc, ref);
 
-	hrtimer_cancel(&phc->extts_timer);
 	sysfs_remove_file(mock_phc_dev_kobj(phc),
 			  &phc->extts_delay_attr.attr);
+	hrtimer_cancel(&phc->extts_timer);
 	ptp_clock_unregister(phc->clock);
 	kfree(phc);
 }
